@@ -1,0 +1,205 @@
+﻿@{
+    ViewData["Title"] = "Shop";
+    Layout = "~/Views/Shared/Layout_Naxus_Other.cshtml";
+}
+@* @model List<Product> *@
+@using X.PagedList.Mvc.Core;
+@model X.PagedList.IPagedList<Product>;
+
+
+<section class="ls s-py-80 s-py-lg-120 s-py-xl-160">
+    <div class="container">
+        <div class="row">
+            <main class="col-lg-8 col-xl-9 order-lg-2">
+                <div class="columns-3">
+
+                    <ul class="products">
+                        @foreach (var item in Model)
+                        {
+                            <li class="product vertical-item padding-small content-padding">
+                                <div class="product-inner hero-bg rounded">
+                                    <a class="link-scale" asp-controller="Home" asp-action="Product" asp-route-id="@item.Id">
+                                        <span class="onsale small-text">Sale!</span>
+                                        <img src="@Url.Content("~/client/images/"+item.ProductImages)" alt="">
+                                    </a>
+                                    <div class="item-content">
+                                        <h2>@item.Name</h2>
+                                        <div class="star-rating">
+                                            <span style="width:80%">
+                                                Rated <strong class="rating">4.00</strong>
+                                                out of 5
+                                            </span>
+                                        </div>
+                                        <span class="price">
+                                            <span>$</span>@item.Price
+                                        </span>
+                                        <a rel="nofollow" asp-action="AddToCart" asp-controller="Cart" asp-route-id="@item.Id"
+                                           class="btn btn-maincolor small-btn product_type_simple add_to_cart_button">
+                                            <span>
+                                                Add
+                                                to cart
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                        
+
+
+                    </ul>
+                </div>
+                <!-- columns 2 -->
+
+                <nav class="woocommerce-pagination">
+                    <ul class="page-numbers">
+                        @Html.PagedListPager(Model, page => Url.Action("Shop", new { page = page }))
+                    </ul>
+                </nav>
+
+            </main>
+            <aside class="col-lg-4 col-xl-3 order-lg-1">
+                <div class="widget widget_product_search">
+
+                    <h5 class="widget-title">Search</h5>
+
+                    <form role="search" class="woocommerce-product-search" action="/">
+
+                        <label class="screen-reader-text" for="woocommerce-product-search-field-widget">
+                            Search for:
+                        </label>
+
+                        <input type="search" id="woocommerce-product-search-field-widget"
+                               class="search-field" placeholder="Keyword" value="" name="search">
+                        <input type="submit" value="Search">
+                    </form>
+                </div>
+
+                <div class="widget woocommerce widget_shopping_cart">
+
+                    <h5 class="widget-title">Shopping Cart</h5>
+
+                    <div class="widget_shopping_cart_content">
+
+                        <ul class="woocommerce-mini-cart cart_list product_list_widget ">
+                            <li class="woocommerce-mini-cart-item mini_cart_item">
+                                <a href="shop-product-right.html">
+                                    <img src="images/12.jpg" alt="">
+                                </a>
+                                <a class="cart-title" href="shop-product-right.html">
+                                    IS Router 002
+                                </a>
+                                <a href="#" class="remove" aria-label="Remove this item"
+                                   data-product_id="73" data-product_sku="">×</a>
+                                <span class="quantity small-text">
+                                    1 x
+                                    <span class="woocommerce-Price-amount amount">
+                                        <span class="woocommerce-Price-currencySymbol">$</span>
+                                        20.00
+                                    </span>
+                                </span>
+                            </li>
+                            <li class="woocommerce-mini-cart-item mini_cart_item">
+                                <a href="shop-product-right.html">
+                                    <img src="images/11.jpg" alt="">
+                                </a>
+                                <a class="cart-title" href="shop-product-right.html">
+                                    Remote Cntrl
+                                </a>
+                                <a href="#" class="remove" aria-label="Remove this item"
+                                   data-product_id="73" data-product_sku="">×</a>
+                                <span class="quantity small-text">
+                                    2 x
+                                    <span class="woocommerce-Price-amount amount">
+                                        <span class="woocommerce-Price-currencySymbol">$</span>
+                                        30.00
+                                    </span>
+                                </span>
+                            </li>
+                        </ul>
+
+                        <p class="woocommerce-mini-cart__total total">
+                            <strong>Subtotal:</strong>
+                            <span class="woocommerce-Price-amount amount ">
+                                <span class="woocommerce-Price-currencySymbol">$</span>
+                                80.00
+                            </span>
+                        </p>
+
+                        <p class="woocommerce-mini-cart__buttons buttons">
+                            <a href="shop-cart.html" class="btn btn-maincolor wc-forward">
+                                <span>
+                                    View
+                                    cart
+                                </span>
+                            </a>
+                            <a href="shop-checkout.html"
+                               class="btn btn-outline-maincolor checkout wc-forward"><span>Checkout</span></a>
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="widget woocommerce widget_product_categories">
+                    <h5 class="widget-title">Categories</h5>
+                    <ul class="product-categories">
+                        <li class="cat-item cat-parent">
+                            <a href="shop-right.html">Clothing</a>
+                            <span class="count">(12)</span>
+                            <ul class="children">
+                                <li class="cat-item">
+                                    <a href="shop-right.html">Hoodies</a>
+                                    <span class="count">(46)</span>
+                                </li>
+                                <li class="cat-item">
+                                    <a href="shop-right.html">T-shirts</a>
+                                    <span class="count">(164)</span>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="cat-item">
+                            <a href="shop-right.html">Posters</a>
+                            <span class="count">(30)</span>
+                        </li>
+                        <li class="cat-item cat-parent">
+                            <a href="shop-right.html">Music</a>
+                            <span class="count">(25)</span>
+                            <ul class="children">
+                                <li class="cat-item">
+                                    <a href="shop-right.html">Albums</a>
+                                    <span class="count">(20)</span>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="widget woocommerce widget_product_tag_cloud">
+
+                    <h5 class="widget-title">Tags</h5>
+
+                    <div class="tagcloud">
+                        <a href="shop-right.html" class="tag-cloud-link" aria-label="album (1 product)">
+                            Premium
+                        </a>
+                        <a href="shop-right.html" class="tag-cloud-link" aria-label="premium (1 product)">
+                            Poster
+                        </a>
+                        <a href="shop-right.html" class="tag-cloud-link" aria-label="product (1 product)">
+                            Single
+                        </a>
+                        <a href="shop-right.html" class="tag-cloud-link" aria-label="single (1 product)">
+                            Album
+                        </a>
+                    </div>
+                </div>
+
+
+
+            </aside>
+        </div>
+    </div>
+</section>
